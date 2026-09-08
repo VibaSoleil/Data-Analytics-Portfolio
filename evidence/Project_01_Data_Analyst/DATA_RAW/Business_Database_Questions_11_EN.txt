@@ -1,0 +1,456 @@
+Main Case (combination of several problems)
+
+"The company has experienced a decline in sales performance over the last several periods. The management team requests an analysis to identify the causes of the decline in revenue and determine improvement strategies."
+
+Participants are required to identify:
+
+Problem 1 — Declining Sales
+
+Analysis:
+
+Comparison of monthly revenue.
+Number of transactions per period.
+Products experiencing declining sales.
+Regions experiencing a decline in contribution.
+
+Problem 2 — Customers Becoming Inactive
+Analysis:
+Customers with old last transactions.
+Customers with high purchase value but are starting to stop.
+Top customers based on total purchases.
+
+Problem 3 — Imbalanced Inventory
+Analysis:
+Products with high stock but low sales.
+Products that need restocking.
+Products generating the highest revenue.
+
+Problem 4 — Data Cleaning Before Analysis
+Tasks:
+Find duplicate products.
+Handle empty customer data.
+Standardize phone numbers.
+Validate:
+jumlah × harga = total_harga
+Validate:
+
+PART 1 — DATA UNDERSTANDING & DATABASE EXPLORATION
+Task 1. Understanding Database Structure
+
+Use database:
+
+perusahaan_db
+
+Analyze the following tables:
+
+produk
+pelanggan
+transaksi
+keuangan
+
+Create documentation:
+
+Explain the function of each table.
+Explain the relationships between tables.
+Create a simple diagram of table relationships (ERD).
+PART 2 — DATA CLEANING
+
+Before conducting business analysis, perform a data quality assessment.
+
+Problem 1: Customer Data Quality
+
+The marketing department has identified potential issues in customer data.
+
+Perform the following analysis:
+
+1. Identify missing values
+
+Find:
+
+customers without addresses.
+customers without phone numbers.
+incomplete customer data.
+
+Output:
+
+id_pelanggan	nama	masalah
+xxx	xxx	alamat kosong
+2. Standardize phone numbers
+
+Find issues:
+
+Example:
+
++62-811-402-8937
+0818762012
+(004) 543 9687
++62 (27) 246-5718
+
+Create a standardization rule:
+
+Final format:
+
+08xxxxxxxxxx
+
+or international format:
+
++628xxxxxxxxxx
+3. Detect duplicate customers
+
+Find customers with possible:
+
+same name.
+same phone number.
+same address.
+
+Provide recommendations:
+
+should they be merged?
+should they be retained?
+Problem 2: Product Data Quality
+
+Potential issues have been identified in the product master.
+
+Analysis:
+
+1. Find duplicate products
+
+Example:
+
+Laptop Lenovo
+Laptop Lenovo
+
+Answer:
+
+Are both products the same item?
+What is the impact on sales reports?
+2. Validate product prices
+
+Compare:
+
+produk.harga
+
+with:
+
+transaksi.total_harga / transaksi.jumlah
+
+Find transactions that do not match.
+
+Problem 3: Financial Transaction Validation
+
+The company wants to ensure that the financial reports are accurate.
+
+Perform the following checks:
+
+Formula:
+
+jumlah × harga produk = total_harga transaksi
+
+Compare:
+
+transaksi.total_harga
+
+with:
+
+keuangan.pemasukan
+
+Find:
+
+transactions with different values.
+transactions without financial data.
+financial data without transactions.
+PART 3 — SALES ANALYSIS
+Problem 4: Are Sales Declining?
+
+Management suspects a decline in sales performance.
+
+Analysis:
+
+1. Monthly sales trend
+
+Calculate:
+
+total revenue per month.
+number of transactions per month.
+number of products sold.
+
+Create visualizations:
+
+Revenue line chart.
+Transaction count bar chart.
+
+Questions:
+
+Month with the highest revenue?
+Month with the lowest revenue?
+Is there a declining trend?
+Problem 5: Best-Selling and Weak Products
+
+Management wants to understand the performance of each product.
+
+Calculate:
+
+Best-performing products based on:
+A. Number of units sold
+
+Ranking:
+
+|product|units sold|ranking|
+
+B. Total revenue
+
+Ranking:
+
+|product|revenue|ranking|
+
+C. Transaction frequency
+
+Analysis:
+
+Do products with high unit sales also generate the highest revenue?
+
+Problem 6: Analysis of Slow-Moving Products
+
+The warehouse team has found that some products have high stock levels.
+
+Find:
+
+Products with:
+
+high stock.
+low sales volume.
+
+Create categories:
+
+Fast Moving Product
+
+Criteria:
+
+high sales.
+stock decreases quickly.
+Slow Moving Product
+
+Criteria:
+
+high stock.
+low transactions.
+
+Provide recommendations:
+
+discounts.
+promotions.
+stock reduction.
+PART 4 — CUSTOMER ANALYSIS
+Problem 7: Identifying the Best Customers
+
+Marketing wants to provide rewards to loyal customers.
+
+Calculate customer rankings based on:
+
+Total purchases
+SUM(total_harga)
+Transaction frequency
+COUNT(id_transaksi)
+Number of products purchased
+
+Create:
+
+Top 10 best customers.
+
+Problem 8: Customer Churn Analysis
+
+The company has lost several customers.
+
+Identify customers who:
+
+have purchased previously.
+have not made a transaction for a long time.
+
+Use:
+
+last transaction date.
+number of previous transactions.
+total purchases.
+
+Group into:
+
+Active Customer
+At-Risk Customer
+Inactive Customer
+
+Provide strategies:
+
+special promotions.
+follow-up.
+loyalty program.
+PART 5 — REGIONAL ANALYSIS
+Problem 9: Sales Distribution Analysis
+
+Use customer address data.
+
+Analysis:
+
+city with the highest number of transactions.
+city with the highest revenue.
+region with the highest number of customers.
+
+Create:
+
+Top 10 potential regions.
+
+Questions:
+
+Which regions need to be strengthened?
+Which regions have new market opportunities?
+PART 6 — TRANSACTION ANALYSIS
+Problem 10: Customer Transaction Patterns
+
+Analysis:
+
+Based on time:
+month.
+date.
+specific period.
+
+Find:
+
+highest transaction period.
+purchasing patterns.
+Based on transaction value:
+
+Group:
+
+Small Transactions
+
+< Rp5 million
+
+Medium Transactions
+
+Rp5 million - Rp20 million
+
+Large Transactions
+
+Rp20 million
+
+Analyze the contribution of each group.
+
+PART 7 — FINANCIAL ANALYSIS
+Problem 11: Revenue Analysis
+
+Use table:
+
+keuangan
+
+Calculate:
+
+total income.
+average income per transaction.
+income growth.
+
+Analysis:
+
+Does an increase in transactions always result in an increase in revenue?
+
+Problem 12: Products with the Largest Revenue Contribution
+
+Combine:
+
+produk
++
+transaksi
++
+keuangan
+
+Find:
+
+Products with contribution:
+
+highest revenue.
+highest number of transactions.
+
+Use the principle:
+
+Pareto Analysis 80/20.
+
+PART 8 — FINAL BUSINESS REPORT
+
+Create a final report for management.
+
+Report contents:
+
+1. Executive Summary
+
+Contains:
+
+current business condition.
+main problems.
+opportunities.
+2. Key Findings
+
+At minimum, identify:
+
+5 business insights.
+
+Example:
+
+"Laptop Lenovo contributes 65% of revenue but carries a risk of product dependency."
+
+3. Business Recommendations
+
+Provide recommendations:
+
+Products
+inventory strategy.
+promotions.
+product development.
+Customers
+loyalty programs.
+customer retention.
+Regions
+market expansion.
+Operations
+data quality improvement.
+FINAL PROJECT OUTPUT
+
+Participants must produce:
+
+1. Database Analysis
+   SQL queries.
+   cleaning results.
+2. Dashboard
+
+At minimum, include:
+
+Revenue KPI.
+total transactions.
+best-performing products.
+best customers.
+sales trends.
+best-performing regions.
+3. Business Report
+
+Format:
+
+PDF / PowerPoint.
+
+Contains:
+
+problems.
+analysis.
+visualizations.
+insights.
+recommendations.
+PROJECT DIFFICULTY LEVEL
+
+Level: Intermediate Data Analyst
+
+Skills assessed:
+
+✅ SQL JOIN
+✅ Aggregation
+✅ Data Cleaning
+✅ Exploratory Data Analysis
+✅ Business Analysis
+✅ Dashboard
+✅ Data Storytelling
+✅ Problem Solving
